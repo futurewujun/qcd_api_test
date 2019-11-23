@@ -1,0 +1,5 @@
+[32mINFO    [0m testing_log:log_test.py:23 正在执行Login模块第2条用例：不输入手机号
+[32mINFO    [0m testing_log:log_test.py:23 参数是：{'mobilephone': '', 'pwd': '123456'}
+[32mINFO    [0m testing_log:log_test.py:23 该条测试用例通过
+[32mINFO    [0m testing_log:log_test.py:23 ******开始写入数据******
+[32mINFO    [0m testing_log:log_test.py:23 ******写入数据完毕******

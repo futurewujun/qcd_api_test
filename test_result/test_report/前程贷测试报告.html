@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>前程贷接口测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 120%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">前程贷接口测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> 未来</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-11-23 21:14:32</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:11.694546</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 28，通过 28，通过率= 100.00%</p>
+
+<p class='description'>注册接口测试报告</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 28 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 28 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 16px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_cases.test_run_01_register.RunCase</td>
+    <td class="text-center">5</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',5)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_1: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in" align="left">
+    <pre>
+    
+pt1_1: 2019-11-23 21:14:32,945-INFO-[testing_log]-[日志信息]:正在执行Register模块第1条用例：正常注册
+2019-11-23 21:14:32,945-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '13564563337', 'pwd': '123456'}
+实际结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '注册成功'}
+2019-11-23 21:14:33,450-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:33,450-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:33,630-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_2: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse in" align="left">
+    <pre>
+    
+pt1_2: 2019-11-23 21:14:33,630-INFO-[testing_log]-[日志信息]:正在执行Register模块第2条用例：不输入手机号
+2019-11-23 21:14:33,640-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '', 'pwd': '123456'}
+实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}
+2019-11-23 21:14:33,730-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:33,730-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:33,880-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_3: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse in" align="left">
+    <pre>
+    
+pt1_3: 2019-11-23 21:14:33,880-INFO-[testing_log]-[日志信息]:正在执行Register模块第3条用例：不输入密码
+2019-11-23 21:14:33,880-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688771656', 'pwd': ''}
+实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '密码不能为空'}
+2019-11-23 21:14:33,970-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:33,970-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:34,100-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_4: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse in" align="left">
+    <pre>
+    
+pt1_4: 2019-11-23 21:14:34,100-INFO-[testing_log]-[日志信息]:正在执行Register模块第4条用例：输入已存在的手机号
+2019-11-23 21:14:34,100-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'pwd': '123456'}
+实际结果：{'status': 0, 'code': '20110', 'data': None, 'msg': '手机号码已被注册'}
+2019-11-23 21:14:34,260-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:34,260-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:34,450-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_5: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="collapse in" align="left">
+    <pre>
+    
+pt1_5: 2019-11-23 21:14:34,450-INFO-[testing_log]-[日志信息]:正在执行Register模块第5条用例：输入格式错误的手机号
+2019-11-23 21:14:34,450-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '186887756569', 'pwd': '123456'}
+实际结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}
+2019-11-23 21:14:34,560-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:34,560-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:34,719-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_cases.test_run_02_login.RunCase</td>
+    <td class="text-center">5</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',5)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_1: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse in" align="left">
+    <pre>
+    
+pt2_1: 2019-11-23 21:14:34,719-INFO-[testing_log]-[日志信息]:正在执行Login模块第1条用例：正常登录
+2019-11-23 21:14:34,719-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18813989999', 'pwd': '123456'}
+实际结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '登录成功'}
+2019-11-23 21:14:34,869-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:34,869-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:35,009-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_2: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse in" align="left">
+    <pre>
+    
+pt2_2: 2019-11-23 21:14:35,009-INFO-[testing_log]-[日志信息]:正在执行Login模块第2条用例：不输入手机号
+2019-11-23 21:14:35,009-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '', 'pwd': '123456'}
+实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}
+2019-11-23 21:14:35,099-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:35,099-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:35,259-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_3: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="collapse in" align="left">
+    <pre>
+    
+pt2_3: 2019-11-23 21:14:35,259-INFO-[testing_log]-[日志信息]:正在执行Login模块第3条用例：不输入密码
+2019-11-23 21:14:35,259-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'pwd': ''}
+实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '密码不能为空'}
+2019-11-23 21:14:35,360-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:35,360-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:35,519-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_4: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="collapse in" align="left">
+    <pre>
+    
+pt2_4: 2019-11-23 21:14:35,519-INFO-[testing_log]-[日志信息]:正在执行Login模块第4条用例：输入错误的手机号
+2019-11-23 21:14:35,519-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '186887756569', 'pwd': '123456'}
+实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}
+2019-11-23 21:14:35,689-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:35,689-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:35,869-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_5: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="collapse in" align="left">
+    <pre>
+    
+pt2_5: 2019-11-23 21:14:35,869-INFO-[testing_log]-[日志信息]:正在执行Login模块第5条用例：输入错误的密码
+2019-11-23 21:14:35,869-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'pwd': '1234567'}
+实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}
+2019-11-23 21:14:36,049-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:36,049-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:36,199-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_cases.run_03_recharge.RunCase</td>
+    <td class="text-center">9</td>
+    <td class="text-center">9</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',9)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_1: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="collapse in" align="left">
+    <pre>
+    
+pt3_1: 2019-11-23 21:14:36,199-INFO-[testing_log]-[日志信息]:正在执行Login模块第1条用例：正常登录
+2019-11-23 21:14:36,199-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18813989999', 'pwd': '123456'}
+实际结果是：{'status': 1, 'code': '10001', 'data': None, 'msg': '登录成功'}
+2019-11-23 21:14:36,379-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:36,389-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:36,538-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_2: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="collapse in" align="left">
+    <pre>
+    
+pt3_2: 2019-11-23 21:14:36,538-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第2条用例：正常充值
+2019-11-23 21:14:36,538-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18813989999', 'amount': 10000}
+实际结果是：{'status': 1, 'code': '10001', 'data': {'id': 93318, 'regname': 'lemonhuahua', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '18813989999', 'leaveamount': '47000.00', 'type': '1', 'regtime': '2019-07-08 10:22:52.0'}, 'msg': '充值成功'}
+2019-11-23 21:14:37,528-ERROR-[testing_log]-[日志信息]:该条测试用例不通过：Decimal('394200.00') != Decimal('384200.00')
+2019-11-23 21:14:37,528-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:37,678-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_3: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse in" align="left">
+    <pre>
+    
+pt3_3: 2019-11-23 21:14:37,678-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第3条用例：不输入手机号
+2019-11-23 21:14:37,678-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '', 'amount': 10000}
+实际结果是：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}
+2019-11-23 21:14:37,778-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:37,778-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:37,948-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_4: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="collapse in" align="left">
+    <pre>
+    
+pt3_4: 2019-11-23 21:14:37,948-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第4条用例：输入未注册手机号
+2019-11-23 21:14:37,958-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '15012345678', 'amount': 10000}
+实际结果是：{'status': 1, 'code': '10001', 'data': {'id': 70870, 'regname': '小蜜蜂', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '15012345678', 'leaveamount': '30350.00', 'type': '1', 'regtime': '2019-06-07 17:09:44.0'}, 'msg': '充值成功'}
+2019-11-23 21:14:38,258-ERROR-[testing_log]-[日志信息]:该条测试用例不通过：{'status': 0, 'code': '20104', 'data': None, 'msg': '此手机号对应的会员不存在'} != {'status': 1, 'code': '10001', 'data': {'id': 70870,[178 chars]值成功'}
+- {'code': '20104', 'data': None, 'msg': '此手机号对应的会员不存在', 'status': 0}
++ {'code': '10001',
++  'data': {'id': 70870,
++           'leaveamount': '30350.00',
++           'mobilephone': '15012345678',
++           'pwd': 'E10ADC3949BA59ABBE56E057F20F883E',
++           'regname': '小蜜蜂',
++           'regtime': '2019-06-07 17:09:44.0',
++           'type': '1'},
++  'msg': '充值成功',
++  'status': 1}
+2019-11-23 21:14:38,258-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:38,388-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_5: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_5'>通过</button>
+    <div id='div_pt3_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_5'>通过</button>
+    <div id='div_pt3_5' class="collapse in" align="left">
+    <pre>
+    
+pt3_5: 2019-11-23 21:14:38,388-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第5条用例：输入格式错误的手机号
+2019-11-23 21:14:38,388-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '186887575656', 'amount': 10000}
+实际结果是：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}
+2019-11-23 21:14:38,478-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:38,478-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:38,630-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_6: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_6'>通过</button>
+    <div id='div_pt3_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_6'>通过</button>
+    <div id='div_pt3_6' class="collapse in" align="left">
+    <pre>
+    
+pt3_6: 2019-11-23 21:14:38,630-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第6条用例：不输入充值额度
+2019-11-23 21:14:38,630-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': ''}
+实际结果是：{'status': 0, 'code': '20115', 'data': None, 'msg': '请输入金额'}
+2019-11-23 21:14:38,731-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:38,731-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:38,890-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_7: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_7'>通过</button>
+    <div id='div_pt3_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_7'>通过</button>
+    <div id='div_pt3_7' class="collapse in" align="left">
+    <pre>
+    
+pt3_7: 2019-11-23 21:14:38,890-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第7条用例：输入充值额度小数超过两位
+2019-11-23 21:14:38,890-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': 100.321}
+实际结果是：{'status': 0, 'code': '20116', 'data': None, 'msg': '输入金额的金额小数不能超过两位'}
+2019-11-23 21:14:38,980-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:38,980-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:39,160-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_8: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_8'>通过</button>
+    <div id='div_pt3_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_8'>通过</button>
+    <div id='div_pt3_8' class="collapse in" align="left">
+    <pre>
+    
+pt3_8: 2019-11-23 21:14:39,160-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第8条用例：输入充值额度为负数
+2019-11-23 21:14:39,160-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': -100}
+实际结果是：{'status': 0, 'code': '20117', 'data': None, 'msg': '请输入范围在0到50万之间的正数金额'}
+2019-11-23 21:14:39,251-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:39,260-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:39,430-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_9: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_9'>通过</button>
+    <div id='div_pt3_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_9'>通过</button>
+    <div id='div_pt3_9' class="collapse in" align="left">
+    <pre>
+    
+pt3_9: 2019-11-23 21:14:39,430-INFO-[testing_log]-[日志信息]:正在执行Recharge模块第9条用例：输入充值额度为特殊字符
+2019-11-23 21:14:39,430-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': '@#'}
+实际结果是：{'status': 0, 'code': '20118', 'data': None, 'msg': '请输入数字'}
+2019-11-23 21:14:39,520-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:39,520-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:39,703-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_cases.run_04_withdraw.RunCase</td>
+    <td class="text-center">9</td>
+    <td class="text-center">9</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',9)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_1: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="collapse in" align="left">
+    <pre>
+    
+pt4_1: 2019-11-23 21:14:39,703-INFO-[testing_log]-[日志信息]:正在执行Login模块第1条用例：正常登录
+2019-11-23 21:14:39,703-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18813989999', 'pwd': '123456'}
+实际结果是：{'status': 1, 'code': '10001', 'data': None, 'msg': '登录成功'}
+2019-11-23 21:14:39,863-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:39,863-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:40,032-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_2: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="collapse in" align="left">
+    <pre>
+    
+pt4_2: 2019-11-23 21:14:40,032-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第2条用例：正常取现
+2019-11-23 21:14:40,032-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18813989999', 'amount': '1000'}
+实际结果是：{'status': 1, 'code': '10001', 'data': {'id': 93318, 'regname': 'lemonhuahua', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '18813989999', 'leaveamount': '46000.00', 'type': '1', 'regtime': '2019-07-08 10:22:52.0'}, 'msg': '取现成功'}
+2019-11-23 21:14:40,332-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:40,332-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:40,472-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_3: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="collapse in" align="left">
+    <pre>
+    
+pt4_3: 2019-11-23 21:14:40,472-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第3条用例：不输入手机号
+2019-11-23 21:14:40,472-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '', 'amount': '1000'}
+实际结果是：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}
+2019-11-23 21:14:40,572-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:40,572-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:40,732-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_4: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="collapse in" align="left">
+    <pre>
+    
+pt4_4: 2019-11-23 21:14:40,732-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第4条用例：输入未注册手机号
+2019-11-23 21:14:40,732-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '13188775656', 'amount': '1000'}
+实际结果是：{'status': 1, 'code': '20104', 'data': None, 'msg': '此手机号对应的会员不存在'}
+2019-11-23 21:14:40,912-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:40,912-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:41,082-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_5: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_5'>通过</button>
+    <div id='div_pt4_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_5'>通过</button>
+    <div id='div_pt4_5' class="collapse in" align="left">
+    <pre>
+    
+pt4_5: 2019-11-23 21:14:41,082-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第5条用例：输入格式错误的手机号
+2019-11-23 21:14:41,082-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '1868877@5656', 'amount': '1000'}
+实际结果是：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}
+2019-11-23 21:14:41,182-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:41,182-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:41,342-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_6: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_6'>通过</button>
+    <div id='div_pt4_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_6'>通过</button>
+    <div id='div_pt4_6' class="collapse in" align="left">
+    <pre>
+    
+pt4_6: 2019-11-23 21:14:41,342-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第6条用例：不输入取现额度
+2019-11-23 21:14:41,342-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': ''}
+post请求出错：HTTPConnectionPool(host='47.107.168.87', port=8080): Max retries exceeded with url: /futureloan/mvc/api/member/withdraw (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000002585114CB38&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+实际结果是：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}
+2019-11-23 21:14:43,591-ERROR-[testing_log]-[日志信息]:该条测试用例不通过：'20115' != '20109'
+- 20115
++ 20109
+
+2019-11-23 21:14:43,591-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:43,740-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_7: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_7'>通过</button>
+    <div id='div_pt4_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_7'>通过</button>
+    <div id='div_pt4_7' class="collapse in" align="left">
+    <pre>
+    
+pt4_7: 2019-11-23 21:14:43,740-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第7条用例：输入取现额度为负数
+2019-11-23 21:14:43,740-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': '-100'}
+实际结果是：{'status': 0, 'code': '20117', 'data': None, 'msg': '请输入范围在0到50万之间的正数金额'}
+2019-11-23 21:14:43,890-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:43,900-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:44,080-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_8: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_8'>通过</button>
+    <div id='div_pt4_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_8'>通过</button>
+    <div id='div_pt4_8' class="collapse in" align="left">
+    <pre>
+    
+pt4_8: 2019-11-23 21:14:44,080-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第8条用例：输入取现额度为特殊字符
+2019-11-23 21:14:44,080-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': '10@00'}
+实际结果是：{'status': 0, 'code': '20118', 'data': None, 'msg': '请输入数字'}
+2019-11-23 21:14:44,180-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:44,180-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:44,330-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case2_9: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_9'>通过</button>
+    <div id='div_pt4_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_9'>通过</button>
+    <div id='div_pt4_9' class="collapse in" align="left">
+    <pre>
+    
+pt4_9: 2019-11-23 21:14:44,330-INFO-[testing_log]-[日志信息]:正在执行Withdraw模块第9条用例：取现额度大于可用余额
+2019-11-23 21:14:44,330-INFO-[testing_log]-[日志信息]:参数是：{'mobilephone': '18688775656', 'amount': '490000'}
+实际结果是：{'status': 1, 'code': '20119', 'data': None, 'msg': '余额不足，请修改提现额度'}
+2019-11-23 21:14:44,480-INFO-[testing_log]-[日志信息]:该条测试用例通过
+2019-11-23 21:14:44,480-INFO-[testing_log]-[日志信息]:******开始写入数据******
+2019-11-23 21:14:44,640-INFO-[testing_log]-[日志信息]:******写入数据完毕******
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>28</td>
+    <td>28</td>
+    <td>0</td>
+    <td>0</td>
+    <td>通过率：100.00%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>
