@@ -11,13 +11,13 @@ import sys
 sys.path.append('./')   #把根目录追加到sys.path
 print(sys.path) #python编译的路径
 
-import HTMLTestRunnerNew
+
 from common import project_path
 from test_cases import test_run_01_register #具体到模块
 from test_cases import test_run_02_login
 from test_cases import run_03_recharge
 from test_cases import run_04_withdraw
-
+import HTMLTestRunnerNew
 class RunTest:
     '''生成测试报告'''
     def run_test(self):
