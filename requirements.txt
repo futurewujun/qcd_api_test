@@ -43,6 +43,6 @@ suds-jurko===0.4.1.jurko.4
 twilio==6.29.0
 
 wcwidth==0.1.7
-Werkzeug==0.15.2
+Werkzeug==0.15.3
 xlrd==1.2.0
 zipp==0.6.0
