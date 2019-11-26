@@ -7,9 +7,9 @@
 # 6：搞定全局变量（path变量，数据与文件分离）
 
 import unittest
-import sys
-sys.path.append('./')   #把根目录追加到sys.path
-print(sys.path) #python编译的路径
+# import sys
+# sys.path.append('./')   #把根目录追加到sys.path
+# print(sys.path) #python编译的路径
 
 
 from common import project_path
