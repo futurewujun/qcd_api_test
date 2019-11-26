@@ -33,7 +33,7 @@ PySocks==1.7.0
 pytest==5.1.2
 python-dateutil==2.7.5
 pytz==2018.7
-pywin32==224
+
 PyYAML==5.1.2
 requests==2.20.0
 selenium==3.141.0
