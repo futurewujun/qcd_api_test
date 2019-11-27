@@ -14,7 +14,7 @@ case_path=os.path.join(project_path,'test_cases','test_api_1.xlsx')
 log_path=os.path.join(project_path,'test_result','test_log','test.log')
 
 #测试报告的路径
-report_path=os.path.join(project_path,'test_result','test_report','前程贷测试报告.html')
+report_path=os.path.join(project_path,'test_result','test_report','QcdTestRepore.html')
 
 #配置文件的路径
 conf_path=os.path.join(project_path,'conf','api_test.conf')
