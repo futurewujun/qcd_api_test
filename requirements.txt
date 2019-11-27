@@ -8,7 +8,7 @@ Click==7.0
 client==0.0.1
 colorama==0.4.1
 coverage==4.5.2
-ddt==1.2.0
+ddt==1.2.1
 et-xmlfile==1.0.1
 Flask==1.0.2
 idna==2.7
@@ -36,6 +36,6 @@ pytz==2018.7
 
 PyYAML==5.1.2
 requests==2.20.0
-ddt
+
 selenium==3.141.0
 
