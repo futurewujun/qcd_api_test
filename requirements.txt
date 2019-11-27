@@ -28,7 +28,7 @@ py==1.8.0
 PyJWT==1.7.1
 PyMySQL==0.9.3
 pyparsing==2.4.2
-pypiwin32==223
+
 PySocks==1.7.0
 pytest==5.1.2
 python-dateutil==2.7.5
