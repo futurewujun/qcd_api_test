@@ -1,5 +1,0 @@
-[32mINFO    [0m testing_log:log_test.py:23 正在执行Login模块第4条用例：输入错误的手机号
-[32mINFO    [0m testing_log:log_test.py:23 参数是{'mobilephone': '186887756569', 'pwd': '123456'}
-[32mINFO    [0m testing_log:log_test.py:23 该条用例通过
-[32mINFO    [0m testing_log:log_test.py:23 写入数据完毕
-[32mINFO    [0m testing_log:log_test.py:23 本条用例结束
