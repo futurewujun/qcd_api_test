@@ -18,7 +18,7 @@ class DoExcel:
     def read_data(self,section):
         '''从Excel读取数据，有返回值'''
         #拿到配置文件的case_id
-        case_id=ReadConfig(project_path.conf_path).get_data(section,'case_id')
+        case_id=ReadConfig().get_data(section,'case_id')
         wb=load_workbook(self.file_name)
         st=wb[self.sheet_name]
         # tel=wb['tel'].cell(1,2).value

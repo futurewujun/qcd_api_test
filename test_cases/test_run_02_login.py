@@ -60,10 +60,4 @@ class RunCase(unittest.TestCase):
             result='failed'
             self.my_log.error('该条测试用例不通过：'.format(e))
             # print('该条测试用例不通过:{}'.format(e))
-        finally:
-            final_result=result
-            self.my_log.info('******开始写入数据******')
-            self.do_exl.write_back(case['CaseId']+1,8,resp.text)   #写实际结果   #03：不同的表单写回，表单名就不能放在初始化函数中
-            self.do_exl.write_back(case['CaseId']+1,9,final_result)    #写测试结果
-            self.my_log.info('******写入数据完毕******')
 

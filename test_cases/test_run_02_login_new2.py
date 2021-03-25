@@ -26,15 +26,15 @@ login_data_new = eval(Do_re().do_re(p,str(login_data)))
 @pytest.fixture(scope="function")
 # TODO fixture 一般是放在conftest中，只能是conftest；在外面 每个测试用例执行时会自动发现conftest的fixture，会先运行conftest里的
 # 不用在测试用例中导入conftest
-def init_api(request):
-    '''获得初始值与测试数据'''
+'''def init_api(request):
+    # 获得初始值与测试数据
     do_exl = DoExcel(project_path.case_path,"Login")
     my_log = MyLog()
-    return do_exl,my_log   # 固定，每调用一次fixture，就取出一个数据,返回的是一个元祖
+    return do_exl,my_log   # 固定，每调用一次fixture，就取出一个数据,多个数据时返回的是一个元祖
     # yield request.param,do_exl,my_log     # yield 和return类似，返回函数的值，但函数遇到return自动终止，遇到yield要继续运行，
                                             # 根据fixture的作用域来执行在函数退出，还是类，模块，会话()
     # driver.quit()                     # 也就是要运行后面的，在web自动化中，执行完测试用例后可以退出浏览器
-
+'''
 # @ddt    #修饰测试类
 # TODO 在类前面也可以使用fixture，引入conftest的init_api
 # @pytest.mark.usefixtures("init_api")
@@ -76,12 +76,7 @@ class TestCase:
             result='failed'
             my_log.error('该条测试用例不通过：'.format(e))
             # print('该条测试用例不通过:{}'.format(e))
-        finally:
-            final_result=result
-            my_log.info('******开始写入数据******')
-            do_exl.write_back(case['CaseId']+1,8,resp.text)   #写实际结果   #03：不同的表单写回，表单名就不能放在初始化函数中
-            do_exl.write_back(case['CaseId']+1,9,final_result)    #写测试结果
-            my_log.info('******写入数据完毕******')
+
 if __name__ == '__main__':
     # pytest.main(["-m moke"])
     pytest.main(['-s'])

@@ -14,6 +14,7 @@ from common import project_path
 from common.log_test import MyLog
 from common.get_data import GetData
 from common import get_data
+
 '''根据反射取值cookies'''
 
 #读取到测试数据
@@ -61,10 +62,5 @@ class RunCase(unittest.TestCase):
         except AssertionError as e:
             self.my_log.error('该条测试用例不通过：{}'.format(e))
             result1='failed'
-        finally:
-            final_result=result1
-            self.my_log.info('******开始写入数据******')
-            self.do_exl.write_back(case_2['CaseId']+1,8,resp.text)
-            self.do_exl.write_back(case_2['CaseId']+1,9,final_result)
-            self.my_log.info('******写入数据完毕******')
+
 

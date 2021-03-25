@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from mysql import connector
+from pymysql import Connect
 from common.read_config import ReadConfig
 from common import project_path
 class DoSql:
@@ -9,10 +10,12 @@ class DoSql:
         '''query:查询语句
            flag：标记，1：查询第一条数据，2：查询获取多条的数据'''
         # 读取配置文件的数据库信息，连接数据库，
-        db_config=ReadConfig(project_path.conf_path).get_data('DB','db_config') # 数据库基本信息
-        cnn=connector.connect(**db_config)  #建立连接
+        db_config=ReadConfig().get_data('DB','db_config') # 数据库基本信息
+        # cnn=connector.connect(**db_config)  #建立连接
+        cnn1 = Connect(**db_config)
         # 获取游标
-        cursor=cnn.cursor()
+        # cursor=cnn.cursor()
+        cursor=cnn1.cursor()
         # 操作数据表， 执行查询语句
         cursor.execute(query)
         # 判断flag，要获取哪些数据
@@ -20,7 +23,7 @@ class DoSql:
             res=cursor.fetchone()   #查询第一条数据，返回的是元祖类型
         else:
             res=cursor.fetchall()   #查询所有的数据，返回的是列表嵌套元祖类型
-        cnn.close()
+        cnn1.close()
         cursor.close()
         return res
 if __name__ == '__main__':

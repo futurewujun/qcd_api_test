@@ -3,7 +3,7 @@ import re
 from common.read_config import ReadConfig
 from common import project_path
 
-config=ReadConfig(project_path.conf_path)
+config=ReadConfig()
 # print(config)
 
 class GetData:
@@ -34,7 +34,7 @@ def replace(target):
 
 if __name__ == '__main__':
     target="{'mobilephone':'#normal_phone#','pwd':'#normal_pwd#'}"
-    print(replace(target))
+    # print(replace(target))
 
 
     # print(GetData.cookies)  # 类名直接调用属性取值
@@ -42,8 +42,10 @@ if __name__ == '__main__':
     #
     # # 利用反射的机制 取值
     # # 第一个参数是类名，第二个参数是属性的参数名
-    # print(getattr(GetData,'cookies'))   #取值
-    # print(setattr(GetData,'cookies','lemon'))   #重新赋值
+    print(getattr(GetData,'cookies'))   #取值
+    print(setattr(GetData,'cookies','lemon'))   #重新赋值
+    print(getattr(GetData, 'cookies'))  # 取值
+
     # print(hasattr(GetData,'cookies'))   #判断是否有属性值
     # print(getattr(GetData,'cookies'))
     # print(delattr(GetData,'cookies'))   #删除属性
