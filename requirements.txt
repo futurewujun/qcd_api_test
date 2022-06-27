@@ -18,7 +18,7 @@ jdcal==1.4
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 more-itertools==7.2.0
-mysql-connector-python==8.0.6
+mysql-connector-python==8.0.14
 numpy==1.15.4
 openpyxl==2.5.12
 packaging==19.1
